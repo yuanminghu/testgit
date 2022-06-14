@@ -1,0 +1,10 @@
+一：配置ssh
+1:ssh-keygen -t rsa -C "youremail@example.com" 一直按回车就可以 最后生成了2个文件 id_rsa,id_rsa.pub
+2:登录github找到setting新建“new ssh key”把id_rsa.pub内容复制到里就可以
+3：测试是否成功 ssh -T git@github.com 如果出现“successfully ”连接成功
+二：github创建仓库
+三：本地仓储与远程仓库地址想连接
+1：git remote add origin 'git@github.com:用户名/创建名称.git'
+四：git push <远程主机名> <本地分支名>:<远程分支名>
+1: git push -u origin master  #带上-u 参数其实就相当于记录了push到远端分支的默认值，这样当下次我们还想要继续push的这个远端分支的时候推送命令就可以简写成git push即可
+
