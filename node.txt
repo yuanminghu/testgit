@@ -27,11 +27,25 @@ HEAD 说明：
     HEAD^2 上上一个版本
     HEAD^3 上上上一个版本
     以此类推...
-简而言之，执行 git reset HEAD 以取消之前 git add 添加，但不希望包含在下一提交快照中的缓存。
+git reset --mixed  保留工作目录，并清空暂存区 把所有差异都混合（mixed）放在工作目录中
+git reset --soft 保留工作目录，并把重置 HEAD 所带来的新的差异放进暂存区 保持工作区，暂存区一致 Repository与工作区，暂存区不一致
+git reset --hard 你的暂存区和工作目录里的内容会被完全重置为和HEAD的新位置相同的内容。换句话说，就是你的没有commit的修改会被全部擦掉。
+
+对于git reset --hard操作后的数据恢复
+1：之前的修改进行了 commit 提交，也就是说我们回退前的修改（曾经）存在于版本里;
+2：之前的修改未进行commit提交，但是进行了 git add 操作；
+3：之前的修改未进行 commit 提交，也未进行git add操作。（目前没有恢复办法）
+第一种情况
+1：先使用 git reflog ，找到 刚才 commit的id
+2：然后使用 git reset --hard [commit id] 切回去即可
+第二种情况
+git fsck --lost-found 运行此命令会在.git->lost-found 出现两个文件夹 commit,other 在oher目录里面可以找到遗失的文件
+
 ==========================================================================================================
 删除git库中untracked files（未监控）的文件
 1:git clean -f #删除 untracked files：
 2:git clean -fd #连 untracked 的目录也一起删掉
 3:git clean -xfd #连 gitignore 的untrack 文件/目录也一起删掉 （慎用，一般这个是用来删掉编译出来的 .o之类的文件用的）：
 ==========================================================================================================
-
+git revert
+参考文档 https://zhuanlan.zhihu.com/p/443183430
