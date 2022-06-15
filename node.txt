@@ -67,12 +67,14 @@ git checkout – . 丢弃全部，也包括：新增的文件会被删除、删�
 对commit提交到本地分支的代码就更没影响了。当然，如果你之前压根都没有暂存或commit，那就是回到你上次pull下来的样子了。
 ================================================================================================================
 error: failed to push some refs to 'github.com:xxxxxxxxx/xxxx.git'
+
 处理方法
 git pull --rebase origin master
 这条指令的意思是把远程库中的更新合并到本地库中，
 –rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。
 ==================================================================
 fatal: you are not currently on a branch (前不是在分支上，因此不能 pull 或者 push)
+
 
 
 
