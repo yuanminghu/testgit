@@ -8,3 +8,5 @@ obj.live = function(){
 obj.walk = function(){
     console.log('walk');
 }
+
+obj.helper = function(){};
