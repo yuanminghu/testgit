@@ -5,4 +5,6 @@ obj.eat = function() {
 obj.live = function(){
     console.log('live')
 }
-obj.walk = function(){}
+obj.walk = function(){
+    console.log('walk');
+}
