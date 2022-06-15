@@ -67,10 +67,14 @@ git checkout – . 丢弃全部，也包括：新增的文件会被删除、删�
 对commit提交到本地分支的代码就更没影响了。当然，如果你之前压根都没有暂存或commit，那就是回到你上次pull下来的样子了。
 ================================================================================================================
 error: failed to push some refs to 'github.com:xxxxxxxxx/xxxx.git'
+分析：
+远程库已修改，但本地库未同步，就会出现以上错误
 处理方法
 git pull --rebase origin master
 这条指令的意思是把远程库中的更新合并到本地库中，
 –rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。
+
+但在使用 git pull --rebase origin 时，也要特别注意，可以看下面对git pull --rebase origin的使用说明
 ==================================================================
 git status 出错 interactive rebase in progress； onto 796e78f
 fatal: you are not currently on a branch (前不是在分支上，因此不能 pull 或者 push)
@@ -83,6 +87,22 @@ master
 解决方案
 使用 git rebase --continue 命令继续代码的提交,执行之后,需要重新提交,解决一下当前的代码冲突之后重新提交直至没有rebase提示,就可以正常提交了
 =====================================================================================================================================
+git pull --rebase origin master
+这条指令的意思是把远程库中的更新合并到本地库中，
+–rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。
+
+注意事项：
 执行 git pull --rebase 的时候必须保持本地目录干净
 1. 有 modified 状态的文件
+    本地有受版本控制的文件改动的时候，执行以上命令：
+    --------------------
+    $ git pull --rebase
+    # 结果如下
+    error: cannot pull with rebase: You have unstaged changes.
+    error: please commit or stash them.
+    ---------------------
+    会出现以上报错，无法操作
 
+    处理方法
+    1。如果本次修改已经完成，则可以先提交（commit）一下
+    2。如果本次修改尚未完成，则可以先贮藏：git stash
